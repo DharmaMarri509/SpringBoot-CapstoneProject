@@ -116,6 +116,10 @@ class InvoiceRepositoryTestEx {
     	 assertThat(savedInvoice.getInvoiceAmount()).isEqualTo(3500.00);
 	 }
 	 
+<<<<<<< HEAD
 	 
+=======
+	
+>>>>>>> cdc540a15b12fe3e9b4226444db6244a9c4ff66b
 	
 }
