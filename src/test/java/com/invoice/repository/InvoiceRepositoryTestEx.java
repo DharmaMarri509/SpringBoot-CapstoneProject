@@ -124,14 +124,6 @@ class InvoiceRepositoryTestEx {
     	 assertThat(savedInvoice.getInvoiceAmount()).isEqualTo(3500.00);
 	 }
 	 
-	 @Test
-	 @DisplayName("testcase to save the invoice without the user")
-	 void testSaveInvoiceWithOutUser() {
-		 
-		 
-		
-    	 
-    	
-	 }
+	
 	
 }
