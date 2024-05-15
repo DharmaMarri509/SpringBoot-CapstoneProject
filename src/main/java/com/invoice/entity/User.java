@@ -36,7 +36,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
 	
-	@NotBlank(message = "Username is required")
+	//@NotBlank(message = "Username is required")
 	private String userName;
 	
 	@NotEmpty(message = "password is not empty")

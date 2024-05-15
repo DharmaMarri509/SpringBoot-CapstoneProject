@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User saveUser(User user) throws BlankNameException{
+	public User saveUser(User user) throws BlankNameException, UserAlreadyExistException{
 		User findByUserName = repo.findByUserName(user.getUserName());
 		if(findByUserName!=null) {
 			
