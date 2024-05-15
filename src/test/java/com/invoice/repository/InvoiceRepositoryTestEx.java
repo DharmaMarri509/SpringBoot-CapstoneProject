@@ -1,6 +1,7 @@
 package com.invoice.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.when;
@@ -26,9 +27,9 @@ import com.invoice.entity.User;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class InvoiceRepositoryTestEx {
 	
-	private Logger log = LoggerFactory.getLogger(UserRepositoryTestEx.class);
+	
 
-	@MockBean
+	@Autowired
 	private InvoiceRepository invoiceRepository;
 	
 	
@@ -76,15 +77,19 @@ class InvoiceRepositoryTestEx {
 	@Test
     @DisplayName("Testing the saving the invoices of a particular user")
     void testSaveInvoice() {
-    	Invoice invoice = new Invoice();
+		Invoice invoice = new Invoice();
+    	User user = new User();
+    	user.setUserId(1);
+    	invoice.setInvoiceId(1);
     	invoice.setClientName("kohli");
     	invoice.setInvoiceAmount(4000.00);
     	invoice.setDescription("buy laptops");
+    	invoice.setUser(user);
+    	Invoice savedInvoice = invoiceRepository.save(invoice);
+    	List<Invoice> invoices = invoiceRepository.findByUserId(1);
+    	assertThat(invoices).isNotNull();
     	
-    	when(invoiceRepository.save(invoice)).thenReturn(invoice);
-    	Invoice inv = invoiceRepository.save(invoice);
     	
-    	assertEquals(invoice, inv);
 
     }
 	
@@ -92,14 +97,16 @@ class InvoiceRepositoryTestEx {
     @DisplayName("Testing finding invoice based on the invoice id")
     void testFindInvoiceByID() {
     	Invoice invoice = new Invoice();
+    	User user = new User();
+    	user.setUserId(1);
     	invoice.setInvoiceId(1);
     	invoice.setClientName("kohli");
     	invoice.setInvoiceAmount(4000.00);
     	invoice.setDescription("buy laptops");
-    	when(invoiceRepository.findById(1).get()).thenReturn(invoice);
-    	Invoice findInvoice = invoiceRepository.findById(1).get();
-    	log.warn(findInvoice.getClientName());
-    	assertEquals("kohli",findInvoice.getClientName());
+    	invoice.setUser(user);
+    	Invoice savedInvoice = invoiceRepository.save(invoice);
+    	Invoice getInvoice = invoiceRepository.findById(savedInvoice.getInvoiceId()).get();
+    	assertThat(getInvoice).isNotNull();
 
     }
 	 @Test
