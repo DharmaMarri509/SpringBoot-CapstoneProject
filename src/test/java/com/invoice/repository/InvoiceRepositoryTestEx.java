@@ -1,24 +1,17 @@
 package com.invoice.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.invoice.entity.Invoice;
 import com.invoice.entity.User;
@@ -26,8 +19,7 @@ import com.invoice.entity.User;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class InvoiceRepositoryTestEx {
-	
-	
+
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
@@ -124,14 +116,6 @@ class InvoiceRepositoryTestEx {
     	 assertThat(savedInvoice.getInvoiceAmount()).isEqualTo(3500.00);
 	 }
 	 
-	 @Test
-	 @DisplayName("testcase to save the invoice without the user")
-	 void testSaveInvoiceWithOutUser() {
-		 
-		 
-		
-    	 
-    	
-	 }
+	 
 	
 }

@@ -13,6 +13,7 @@ import com.invoice.entity.User;
 import com.invoice.exception.BlankNameException;
 import com.invoice.exception.RecordNotFoundException;
 import com.invoice.exception.UserAlreadyExistException;
+import com.invoice.exception.UserNotFoundException;
 import com.invoice.service.UserService;
 import com.invoice.service.UserServiceImpl;
 
@@ -40,7 +41,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public ResponseEntity<User> loginUser(@RequestParam("userName") String userName, @RequestParam("password") String password){
+	public ResponseEntity<User> loginUser(@RequestParam("userName") String userName, @RequestParam("password") String password) throws UserNotFoundException{
 		
 		return new ResponseEntity<>(service.getUser(userName, password), HttpStatus.OK);
 	}
