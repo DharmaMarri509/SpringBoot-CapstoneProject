@@ -72,6 +72,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 	
 	public String deleteInvoice(Integer invoiceId) {
 		irepo.deleteById(invoiceId);
-		return "invoice deleted successfuly with id "+invoiceId;
+		return "invoice deleted";
 	}
 }

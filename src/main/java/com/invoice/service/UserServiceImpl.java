@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.invoice.entity.User;
 import com.invoice.exception.BlankNameException;
-import com.invoice.exception.RecordNotFoundException;
 import com.invoice.exception.UserAlreadyExistException;
 import com.invoice.exception.UserNotFoundException;
 import com.invoice.repository.UserRepository;
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService {
 			log.info("user is not registered successfully");
 			throw new UserAlreadyExistException("user already found with name :- "+user.getUserName());
 		}else {
-			if(user.getUserName().equals("")) {
+			if(user.getUserName().equals("") || user.getUserName().equals(null)) {
 				throw new BlankNameException("name should not be blank");
 			}
 			log.info("user registered successfully");
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getUser(String userName, String password) throws UserNotFoundException {
+	public Integer getUser(String userName, String password) throws UserNotFoundException {
 		User user = repo.findByUserName(userName);
 		if(userName.equals("") || password.equals("")) {
 			throw new UserNotFoundException("dont pass empty values for the username and password");
@@ -50,11 +49,16 @@ public class UserServiceImpl implements UserService {
 		String name = user.getUserName();
 		String pwd = user.getPassword();
 		if(userName.equals(name) && password.equals(pwd)) {
-			return repo.findByUserNameAndPassword(userName, password);
+			return user.getUserId();
 		}else {
 			throw new UserNotFoundException("no user matched with the entered username and password");
 		}
 		
+	}
+	
+	public String getUserByPassword(String userName) {
+		User user = repo.findByUserName(userName);
+		return user.getPassword();
 	}
 }
 		

@@ -38,15 +38,13 @@ public class InvoiceController {
 		return new ResponseEntity<>(iservice.addInvoice(userId, invoice), HttpStatus.CREATED);
 	}
 	
-	@GetMapping(value = "/getInvoicesList",
-			produces = "application/json")
+	@GetMapping(value = "/getInvoicesList")
 	public ResponseEntity<List<Invoice>> invoices(@RequestParam("userId")Integer userId){
 		
 		return new ResponseEntity<>(iservice.getInvoices(userId), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getInvoice",
-			produces = "application/json")
+	@GetMapping(value = "/getInvoice")
 	public ResponseEntity<Invoice> getInvoiceById(@RequestParam("invoiceId")Integer invoiceId) throws RecordNotFoundException{
 		return new ResponseEntity<>(iservice.getInvoiceById(invoiceId), HttpStatus.OK);
 	}

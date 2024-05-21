@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -35,20 +38,26 @@ public class Invoice {
 	
 	@NotBlank(message = "Clientname is required")
 	@Size(min=5, message = "clientname should contain atleast 5 characters")
+	@Column(nullable = false)
 	private String clientName;
 	
 	
 	@Min(value=3000, message = "invoice amount should be minimum 3000")
 	@Positive(message = "Amount must be positive")
+	@Column(nullable = false)
 	private Double invoiceAmount;
 	
-	@CreationTimestamp
+	//@CreationTimestamp
     @PastOrPresent(message = "Event date must be in the past or present")
+    @Column(nullable= false)
 	private LocalDate createdDate;
 	
 	private String description;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userId")
 	private User user;
+
+	
 }

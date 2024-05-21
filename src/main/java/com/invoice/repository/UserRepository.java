@@ -7,7 +7,7 @@ import com.invoice.entity.User;
 
 public interface UserRepository  extends CrudRepository<User, Integer>{
 
-	public User findByUserNameAndPassword(String userName, String password);
+	public Integer findByUserNameAndPassword(String userName, String password);
 	
 	
 	public User findByUserName(String userName); //used to find the unique user name is saving or not

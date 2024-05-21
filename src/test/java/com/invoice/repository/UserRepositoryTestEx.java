@@ -56,7 +56,7 @@ class UserRepositoryTestEx {
         User savedUser = repo.save(user);
         String userName = savedUser.getUserName();
         String password = savedUser.getPassword();
-        User result = repo.findByUserNameAndPassword(userName, password);
+        Integer result = repo.findByUserNameAndPassword(userName, password);
         assertThat(result).isNotNull();
     }
 	

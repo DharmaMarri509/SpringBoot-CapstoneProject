@@ -1,5 +1,8 @@
 package com.invoice.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.invoice.entity.User;
 import com.invoice.exception.BlankNameException;
-import com.invoice.exception.RecordNotFoundException;
 import com.invoice.exception.UserAlreadyExistException;
 import com.invoice.exception.UserNotFoundException;
 import com.invoice.service.UserService;
-import com.invoice.service.UserServiceImpl;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
 
 public class UserController {
+	
+	
 	
 	private UserService service;
 	
@@ -41,8 +43,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/login")
-	public ResponseEntity<User> loginUser(@RequestParam("userName") String userName, @RequestParam("password") String password) throws UserNotFoundException{
+	public ResponseEntity<Integer> loginUser(@RequestParam("userName") String userName, @RequestParam("password") String password) throws UserNotFoundException{
 		
 		return new ResponseEntity<>(service.getUser(userName, password), HttpStatus.OK);
 	}
+	
+
+	
 }

@@ -9,5 +9,7 @@ public interface UserService {
 
 	public User saveUser(User user) throws BlankNameException, UserAlreadyExistException;
 	
-	public User getUser(String userName, String password) throws UserNotFoundException;
+	public Integer getUser(String userName, String password) throws UserNotFoundException;
+	
+	public String getUserByPassword(String userName);
 }
